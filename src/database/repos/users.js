@@ -21,15 +21,25 @@ class UsersRepository {
 
     // Removes all records from the table
     async empty() {
-        return this.db.none(sql.empty)
+        return this.db.result(sql.empty)
     }
 
-    async add(username, email, password, admin) {
+    async add(query) {
         return this.db.one(sql.add, {
-            username: username,
-            email: email,
-            password: password,
-            admin: admin
+            username: query.username,
+            email: query.email,
+            password: query.password,
+            admin: query.admin === 'true'
+        })
+    }
+
+    async edit(id, query, defaultValues) {
+        return this.db.one(sql.edit, {
+            userId: id,
+            username: query.username,
+            email: query.email,
+            password: query.password,
+            admin: query.admin === 'true'
         })
     }
 

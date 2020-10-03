@@ -1,4 +1,4 @@
-INSERT INO users (username, email, password, admin) values
+INSERT INTO users (username, email, password, admin) values
 (
  ${username},
  ${email},

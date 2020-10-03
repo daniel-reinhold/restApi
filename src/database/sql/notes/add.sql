@@ -5,3 +5,5 @@ INSERT INTO notes (user_id, title, description, due_date) VALUES
  ${description},
  ${dueDate}
 )
+
+RETURNING *
