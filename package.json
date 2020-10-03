@@ -11,8 +11,10 @@
   "author": "Daniel Reinhold",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "express": "^4.17.1",
-    "mongoose": "^5.10.7"
+    "jquery": "^3.5.1",
+    "pg-promise": "^10.6.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
