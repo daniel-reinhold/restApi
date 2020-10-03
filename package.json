@@ -1,14 +1,14 @@
 {
   "name": "restApi",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple REST API",
   "main": "index.js",
   "scripts": {
     "start-watch": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Daniel Reinhold",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
