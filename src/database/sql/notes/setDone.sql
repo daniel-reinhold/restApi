@@ -1,0 +1,1 @@
+UPDATE notes set done=true WHERE id=${id}

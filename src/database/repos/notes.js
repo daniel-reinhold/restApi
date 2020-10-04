@@ -14,6 +14,11 @@ class NotesRepository {
         return this.db.none(sql.create)
     }
 
+    // Drops the table
+    async drop() {
+        return this.db.none(sql.drop)
+    }
+
     // Removes all records from the table
     async empty() {
         return this.db.result(sql.empty)
@@ -39,6 +44,10 @@ class NotesRepository {
             description: query.description || data.description,
             dueDate: query.dueDate || data.dueDate
         })
+    }
+
+    async setDone(id) {
+        return this.db.oneOrNone(sql.setDone, {id: id})
     }
 
     // Removes a note

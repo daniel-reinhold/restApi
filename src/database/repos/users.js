@@ -14,6 +14,11 @@ class UsersRepository {
         return this.db.none(sql.create)
     }
 
+    // Drops the table
+    async drop() {
+        return this.db.none(sql.drop)
+    }
+
     // Removes all records from the table
     async empty() {
         return this.db.result(sql.empty)

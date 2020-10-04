@@ -8,6 +8,7 @@ module.exports = {
         edit: sql('users/edit.sql'),
         delete: sql('users/delete.sql'),
         empty: sql('users/empty.sql'),
+        drop: sql('users/drop.sql'),
         selectAll: sql('users/selectAll.sql'),
         find: sql('users/find.sql')
     },
@@ -17,8 +18,10 @@ module.exports = {
         add: sql('notes/add.sql'),
         edit: sql('notes/edit.sql'),
         delete: sql('notes/delete.sql'),
+        drop: sql('notes/drop.sql'),
         find: sql('notes/find.sql'),
-        getForUser: sql('notes/getForUser.sql')
+        getForUser: sql('notes/getForUser.sql'),
+        setDone: sql('notes/setDone.sql')
     }
 }
 
