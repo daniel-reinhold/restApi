@@ -1,12 +1,16 @@
 let express = require('express')
+const RoutesHelper = require('./routesHelper')
+const { db } = require('../database')
+
 let router = express.Router()
 
-router.get('/notes', (req, res) => {
-    res.send('You have requested all notes')
-})
+RoutesHelper.GET(router, '/notes/:id', req => db.notes.find(req.params.id))
 
-router.get('/note/:id', (req, res) => {
-    res.send(`You have requested a note with the id ${req.params.id}`)
-})
+RoutesHelper.POST(router, '/notes/add', req => db.notes.add(req.query))
+
+RoutesHelper.PATCH(router, '/notes/:id', req => db.notes.edit(req.params.id, req.query))
+
+RoutesHelper.DELETE(router, '/notes', () => db.notes.empty())
+RoutesHelper.DELETE(router, '/notes/:id', req => db.notes.delete(req.params.id))
 
 module.exports = router

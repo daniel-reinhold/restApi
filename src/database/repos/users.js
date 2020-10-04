@@ -9,14 +9,9 @@ class UsersRepository {
         createColumnSets(pgp)
     }
 
-    // Creates the table
+    // Creates the users table
     async create() {
         return this.db.none(sql.create)
-    }
-
-    // Drops the table
-    async drop() {
-        return this.db.none(sql.drop)
     }
 
     // Removes all records from the table
@@ -24,6 +19,7 @@ class UsersRepository {
         return this.db.result(sql.empty)
     }
 
+    // Adds a user
     async add(query) {
         return this.db.one(sql.add, {
             username: query.username,
@@ -33,39 +29,32 @@ class UsersRepository {
         })
     }
 
-    async edit(id, query, defaultValues) {
+    // Edits a user
+    async edit(id, query) {
+        let data = await this.db.oneOrNone(sql.find, {id: id})
+
         return this.db.one(sql.edit, {
             userId: id,
-            username: query.username,
-            email: query.email,
-            password: query.password,
-            admin: query.admin === 'true'
+            username: query.username || data.username,
+            email: query.email || data.email,
+            password: query.password || data.password,
+            admin: query.admin === 'true' || data.admin
         })
     }
 
-    // Removes a uses by ID
+    // Removes a user
     async delete(id) {
         return this.db.result(sql.delete, {id: id})
     }
 
-    // Finds a user by ID
-    async findById(id) {
-        return this.db.oneOrNone(sql.findById, {id: id})
-    }
-
-    // Finds a user by username
-    async findByUsername(username) {
-        return this.db.oneOrNone(sql.findByUsername, {username: username})
+    // Finds a user
+    async find(id) {
+        return this.db.oneOrNone(sql.find, {id: id})
     }
 
     // Returns all Users
     async all() {
         return this.db.any(sql.selectAll)
-    }
-
-    // Returns the total amount of users
-    async totalAmount() {
-        return this.db.one(sql.amountOfUsers)
     }
 }
 

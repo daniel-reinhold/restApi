@@ -9,17 +9,15 @@ module.exports = {
         delete: sql('users/delete.sql'),
         empty: sql('users/empty.sql'),
         selectAll: sql('users/selectAll.sql'),
-        amountOfUsers: sql('users/totalAmount.sql'),
-        findById: sql('users/findById.sql'),
-        findByUsername: sql('users/findByUsername.sql'),
-        drop: sql('users/drop.sql')
+        find: sql('users/find.sql')
     },
     notes: {
         create: sql('notes/create.sql'),
-        drop: sql('notes/drop.sql'),
+        empty: sql('notes/empty.sql'),
         add: sql('notes/add.sql'),
-        remove: sql('notes/delete.sql'),
-        findById: sql('notes/findById.sql'),
+        edit: sql('notes/edit.sql'),
+        delete: sql('notes/delete.sql'),
+        find: sql('notes/find.sql'),
         getForUser: sql('notes/getForUser.sql')
     }
 }

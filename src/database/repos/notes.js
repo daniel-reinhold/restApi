@@ -9,35 +9,49 @@ class NotesRepository {
         createColumnSets(pgp)
     }
 
-    // Creates the table
+    // Creates the notes table
     async create() {
         return this.db.none(sql.create)
     }
 
-    // Drops the table
-    async drop() {
-        return this.db.none(sql.drop)
+    // Removes all records from the table
+    async empty() {
+        return this.db.result(sql.empty)
     }
 
-    async add(userId, title, description, dueDate) {
+    // Adds a note
+    async add(query) {
         return this.db.one(sql.add, {
-            userId: userId,
-            title: title,
-            description: description,
-            dueDate: dueDate
+            userId: query.userId,
+            title: query.title,
+            description: query.description,
+            dueDate: query.dueDate
         })
     }
 
-    // Removes a note by ID
+    // Edits a note
+    async edit(id, query) {
+        let data = await this.db.oneOrNone(sql.find, {id: id})
+
+        return this.db.one(sql.edit, {
+            id: id,
+            title: query.title || data.title,
+            description: query.description || data.description,
+            dueDate: query.dueDate || data.dueDate
+        })
+    }
+
+    // Removes a note
     async delete(id) {
         return this.db.result(sql.delete, {id: id})
     }
 
-    // Finds a note by ID
-    async findById(id) {
-        return this.db.oneOrNone(sql.findById, {id: id})
+    // Finds a note
+    async find(id) {
+        return this.db.oneOrNone(sql.find, {id: id})
     }
 
+    // Gets all notes for user
     async getForUser(id) {
         return this.db.any(sql.getForUser, {userId: id})
     }
